@@ -1,49 +1,51 @@
 <template>
   <div class="card">
     <div>
-      <button class="card__btn">I want hear another one!</button>
+      <button class="card__btn" @click="loadJoke">I want hear another one!</button>
       <h2 class="card__title">One day dad said:</h2>
     </div>
-    <p class="card__text"></p>
-    <p class="card__id"></p>
+    <p v-if="loading">Loading...</p>
+    <p v-if="dataLoaded" class="card__text">{{data.joke}}</p>
+    <p v-if="dataLoaded" class="card__id">{{data.id}}</p>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   data(){
     return{
-      data: '',
-      url: 'https://icanhazdadjoke.com/',
-      options: {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        
-      }
+      data: {},
+      joke: '',
+      id: '',
+      dataLoaded: false,
+      loading: false,
     }
   },
   methods: {
-    async loadJoke(){
-      try {
-        const response = await fetch(this.url, this.options);
-        if(!response.ok){
-          const msg = 'Nothing found';
-          throw new Error(msg);
-        }
-        this.data = await response.json();
-        console.log(this.data);
-      } catch(error){
-        console.log(error);
-      }
+    loadJoke(){
+      const joke = this;
+      this.dataLoaded = false;
+      this.loading = true;
+      const url = "https://icanhazdadjoke.com/";
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+        
+
+      xhr.setRequestHeader("Accept", "application/json");
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            joke.data = JSON.parse(xhr.responseText);
+            joke.loading = false;
+            joke.dataLoaded = true;
+      }};
+
+      xhr.send();
     }
   },
-  mounted(){
-    this.loadJoke();
-  }
 }
 </script>
 
