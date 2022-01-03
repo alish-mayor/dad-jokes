@@ -1,9 +1,11 @@
 <template>
   <div class="card">
-    <div>
+    <div class="card__buttons">
       <button class="card__btn" @click="loadJoke">I want hear another one!</button>
-      <button class="card__btn" @click="addToFavourites">Add to favourites</button>
+    </div>
+    <div class="header">
       <h2 class="card__title">One day dad said:</h2>
+      <button class="card__btn card__btn_dark" @click="addToFavourites">Add to favourites</button>
     </div>
     <p v-if="loading">Loading...</p>
     <p v-if="dataLoaded" class="card__text">{{data.joke}}</p>
@@ -53,6 +55,38 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
+.card{
+
+  &__title{
+    font-size: 2rem;
+  }
+
+  &__buttons{
+    text-align: center;
+  }
+  
+
+  &__btn{
+    background: #2c3e50;
+    font-family: inherit;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #ffffff;
+
+    &_dark{
+      background: #e23c13;
+    }
+
+
+  }
+}
 </style>
