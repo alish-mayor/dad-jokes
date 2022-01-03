@@ -1,5 +1,22 @@
 <template>
   <div class="favourites">
-    <h1>This is an about page</h1>
+    <ol>
+      <li v-for="joke in favourites" :key="joke.id">
+        <p>{{joke.joke}}</p>
+        <p>ID: {{joke.id}}</p>
+        <hr>
+      </li>
+    </ol>
   </div>
 </template>
+
+<script>
+export default {
+   name: 'Favourites',
+   computed:{
+     favourites(){
+       return this.$store.state.favourites;
+     }
+   }
+}
+</script>

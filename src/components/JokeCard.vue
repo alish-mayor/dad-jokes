@@ -2,11 +2,12 @@
   <div class="card">
     <div>
       <button class="card__btn" @click="loadJoke">I want hear another one!</button>
+      <button class="card__btn" @click="addToFavourites">Add to favourites</button>
       <h2 class="card__title">One day dad said:</h2>
     </div>
     <p v-if="loading">Loading...</p>
     <p v-if="dataLoaded" class="card__text">{{data.joke}}</p>
-    <p v-if="dataLoaded" class="card__id">{{data.id}}</p>
+    <p v-if="dataLoaded" class="card__id">ID: {{data.id}}</p>
   </div>
 </template>
 
@@ -44,7 +45,10 @@ export default {
       }};
 
       xhr.send();
-    }
+    },
+    addToFavourites(){
+      this.$store.commit('addToFavourites', this.data);
+    },
   },
 }
 </script>
