@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import helper from '../helper.js';
 
 export default {
   name: 'HelloWorld',
@@ -40,6 +41,7 @@ export default {
             joke.data = JSON.parse(xhr.responseText);
             joke.loading = false;
             joke.dataLoaded = true;
+            joke.$store.commit('changeCurrentJoke', joke.data);
       }};
 
       xhr.send();
@@ -47,7 +49,21 @@ export default {
     addToFavourites(){
       this.$store.commit('addToFavourites', this.data);
     },
+
   },
+  created(){
+    if(helper.methods.checkEmpty(this.currentJoke)){
+      return;
+    } else {
+      this.dataLoaded = true;
+      this.data = this.currentJoke;
+    }
+  },
+  computed: {
+    currentJoke(){
+      return this.$store.state.currentJoke;
+    }
+  }
 }
 </script>
 

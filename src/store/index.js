@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    currentJoke: {},
     favourites: [],
   },
   mutations: {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     deleteJoke(state, index) {
       state.favourites.splice(index, 1);
+    },
+    changeCurrentJoke(state, joke) {
+      state.currentJoke = Object.assign({}, joke);
     },
   },
   actions: {},
