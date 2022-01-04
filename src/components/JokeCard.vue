@@ -4,7 +4,7 @@
     <div v-if="dataLoaded">
     <p class="card__text">{{ data.joke }}</p>
     <p class="card__id">#ID: {{ data.id }}</p>
-    <button class="card__btn card__btn_add">Add to favourites</button>
+    <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
     </div>
   </div>
 </template>
@@ -47,10 +47,6 @@ export default {
     addToFavourites(){
       this.$store.commit('addToFavourites', this.data);
     },
-    test(){
-      console.log('test');
-      this.dataLoaded = true;
-    }
   },
 }
 </script>

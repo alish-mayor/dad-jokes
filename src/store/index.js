@@ -14,6 +14,9 @@ export default new Vuex.Store({
         return;
       state.favourites.push(joke);
     },
+    deleteJoke(state, index) {
+      state.favourites.splice(index, 1);
+    },
   },
   actions: {},
   modules: {},

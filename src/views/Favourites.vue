@@ -2,21 +2,13 @@
   <div class="favourites">
     <h1 class="favourites__title">Favourites</h1>
     <ol class="favourites__list">
-      <li class="favourites__item">
+      <li v-for="(item, index) in favourites" :key="item.id" class="favourites__item">
         <div>
-          <p class="favourites__text">What do you call cheese by itself? Provolone.</p>
-          <p class="favourites__id">#ID: hNu4oORnOmb</p>
+          <p class="favourites__text">{{ item.joke }}</p>
+          <p class="favourites__id">#ID: {{ item.id }}</p>
         </div>
-        <button class="card__btn card__btn_load">Del</button>
+        <button class="card__btn card__btn_load" @click="deleteJoke(index)">Del</button>
       </li>
-      <li class="favourites__item">
-        <div>
-          <p class="favourites__text">What do you call cheese by itself? Provolone.</p>
-          <p class="favourites__id">#ID: hNu4oORnOmb</p>
-        </div>
-        <button class="card__btn card__btn_load">Del</button>
-      </li>
-      
     </ol>
   </div>
 </template>
@@ -27,6 +19,11 @@ export default {
    computed:{
      favourites(){
        return this.$store.state.favourites;
+     }
+   },
+   methods: {
+     deleteJoke(index){
+       this.$store.commit('deleteJoke', index);
      }
    }
 }
@@ -68,6 +65,7 @@ export default {
     font-size: 1.8rem;
     color: #2c3e50;
     margin-bottom: 0.5rem;
+    width: 90%;
   }
 
   &__id{
