@@ -3,7 +3,7 @@
     <div class="card__buttons">
       <button class="card__btn" @click="loadJoke">I want hear another one!</button>
     </div>
-    <div class="header">
+    <div>
       <h2 class="card__title">One day dad said:</h2>
       <button class="card__btn card__btn_dark" @click="addToFavourites">Add to favourites</button>
     </div>
@@ -56,37 +56,5 @@ export default {
 </script>
 
 <style lang="scss">
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
 
-.card{
-
-  &__title{
-    font-size: 2rem;
-  }
-
-  &__buttons{
-    text-align: center;
-  }
-  
-
-  &__btn{
-    background: #2c3e50;
-    font-family: inherit;
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    color: #ffffff;
-
-    &_dark{
-      background: #e23c13;
-    }
-
-
-  }
-}
 </style>

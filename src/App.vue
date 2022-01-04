@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <h2 class="title">Dad<span class="title_red">Jokes</span></h2>
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/favourites">Favourites</router-link>
-    </div>
-    <router-view/>
+    <header class="header">
+      <h1 class="logo">Dad<span class="logo_red">Jokes</span></h1>
+      <nav class="nav">
+        <router-link to="/">Home</router-link>
+        <router-link to="/favourites">Favourites</router-link>
+      </nav>
+    </header>
+    <main class="main">
+      <router-view/>
+    </main>    
   </div>
 </template>
 
@@ -13,7 +17,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 $primary: #e23c13;
-$text-dark: #2c3e50;
+$dark: #2c3e50;
+$white: #ffffff;
+
+*,
+*::before,
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root{
   font-size: 10px;
@@ -23,33 +36,43 @@ $text-dark: #2c3e50;
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $text-dark;
 }
 
-#nav {
-  text-align: center;
-  margin-bottom: 1rem;
-  a {
-    font-size: 2rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: $text-dark;
-
-    &.router-link-exact-active {
-      color: $primary;
-    }
-
-    &:first-child{
-      margin-right: 1rem;
-    }
-  }
+.header{
+  background: $dark;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 4rem;
 }
 
-.title{
-  font-size: 2rem;
+.logo{
+  font-size: 3rem;
+  color: $white;
+  font-weight: 700;
 
   &_red{
     color: $primary;
   }
 }
+
+.nav{
+
+  a{
+    font-size: 2rem;
+    font-weight: 400;
+    text-decoration: none;
+    color: $white;
+
+    &.router-link-exact-active{
+      color: $primary;
+    }
+
+    &:first-child{
+      margin-right: 1.8rem;
+    }
+  }
+}
+
+
 </style>
