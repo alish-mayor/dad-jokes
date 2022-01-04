@@ -6,6 +6,10 @@
     <p class="card__id">#ID: {{ data.id }}</p>
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
     </div>
+    <div class="notif" v-if="featured">
+      <h3 class="notif__title">Success!</h3>
+      <p class="notif__subtitle">Your joke added to favourites list.</p>
+    </div>
   </div>
 </template>
 
@@ -21,6 +25,7 @@ export default {
       id: '',
       dataLoaded: false,
       loading: false,
+      featured: false,
     }
   },
   methods: {
@@ -48,7 +53,11 @@ export default {
     },
     addToFavourites(){
       this.$store.commit('addToFavourites', this.data);
-    },
+      this.featured = true;
+      setTimeout(() => {
+        this.featured = false;
+      }, 2000)
+    },  
 
   },
   created(){
@@ -87,4 +96,25 @@ export default {
   .card__btn_add{
     background: #2c3e50;
   }
+
+
+.notif{
+  position: fixed;
+  top: calc(9rem + 20px);
+  right: 20px;
+  padding: 2rem 3rem;
+  background: #ffffff;
+  border-radius: 15px;
+  text-align: center;
+  color: #2c3e50;
+
+  &__title{
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle{
+    font-size: 1.4rem;
+  }
+}
 </style>
