@@ -87,6 +87,10 @@ $white: #ffffff;
   :root{
   font-size: 8px;
   }
+
+  .header{
+    padding: 2rem 1rem;
+  }
 }
 
 </style>
