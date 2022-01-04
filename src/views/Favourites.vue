@@ -44,7 +44,7 @@ export default {
     margin-top: 2rem;
     background: #ffffff;
     width: 66.5rem;
-    min-width: 32rem;
+    min-width: 30rem;
     list-style-type: none;
     border-radius: 15px;
     box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.25);

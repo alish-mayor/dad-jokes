@@ -56,7 +56,7 @@ export default {
       this.featured = true;
       setTimeout(() => {
         this.featured = false;
-      }, 2000)
+      }, 3000)
     },  
 
   },
@@ -107,6 +107,8 @@ export default {
   border-radius: 15px;
   text-align: center;
   color: #2c3e50;
+  animation: 2s ease-in-out 1s fadeAway;
+
 
   &__title{
     font-size: 1.6rem;
@@ -115,6 +117,16 @@ export default {
 
   &__subtitle{
     font-size: 1.4rem;
+    color: #ACACAC;
+  }
+}
+
+@keyframes fadeAway {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
   }
 }
 </style>
