@@ -1,6 +1,7 @@
 <template>
   <div class="favourites">
     <h1 class="favourites__title">Favourites</h1>
+    <p class="favourites__caption" v-if="favourites.length < 1">You don't have any favourited joke yet. <br> Please add one at least!</p>
     <ol class="favourites__list">
       <li v-for="(item, index) in favourites" :key="item.id" class="favourites__item">
         <div>
@@ -40,7 +41,7 @@ export default {
   }
 
   &__list{
-    margin-top: 3rem;
+    margin-top: 2rem;
     background: #ffffff;
     width: 66.5rem;
     min-width: 32rem;
@@ -71,6 +72,13 @@ export default {
   &__id{
     font-size: 1.4rem;
     color: #A6A6A6;
+  }
+
+  &__caption{
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    color: #acacac;
+    text-align: center;
   }
 }
 
