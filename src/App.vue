@@ -74,5 +74,19 @@ $white: #ffffff;
   }
 }
 
+.main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #F4F3F3;
+  padding: 1rem;
+}
+
+@media (min-width: 320px) and (max-width: 600px) {
+  :root{
+  font-size: 8px;
+  }
+}
 
 </style>

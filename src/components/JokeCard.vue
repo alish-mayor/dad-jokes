@@ -1,15 +1,9 @@
 <template>
-  <div class="card">
-    <div class="card__buttons">
-      <button class="card__btn" @click="loadJoke">I want hear another one!</button>
-    </div>
-    <div>
-      <h2 class="card__title">One day dad said:</h2>
-      <button class="card__btn card__btn_dark" @click="addToFavourites">Add to favourites</button>
-    </div>
-    <p v-if="loading">Loading...</p>
-    <p v-if="dataLoaded" class="card__text">{{data.joke}}</p>
-    <p v-if="dataLoaded" class="card__id">ID: {{data.id}}</p>
+  <div class="content">
+    <!-- <p v-if="loading">Loading...</p> -->
+    <p class="card__text">What do you call cheese by itself? Provolone. asdjkndjandkjas asdjsandasj njkd asdnas jkdansd asdj njkn</p>
+    <p class="card__id">#ID: hNu4oORnOmb</p>
+    <button class="card__btn card__btn_add">Add to favourites</button>
   </div>
 </template>
 
@@ -56,5 +50,23 @@ export default {
 </script>
 
 <style lang="scss">
+  .content{
+    margin-top: 3rem;
+  }
 
+  .card__text{
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  .card__id{
+    font-size: 1.6rem;
+    color: #A6A6A6;
+    margin-bottom: 1.5rem;
+  }
+
+  .card__btn_add{
+    background: #2c3e50;
+  }
 </style>
