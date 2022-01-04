@@ -1,9 +1,11 @@
 <template>
   <div class="content">
-    <!-- <p v-if="loading">Loading...</p> -->
-    <p class="card__text">What do you call cheese by itself? Provolone.</p>
-    <p class="card__id">#ID: hNu4oORnOmb</p>
+    <p v-if="loading" class="card__text">Loading...</p>
+    <div v-if="dataLoaded">
+    <p class="card__text">{{ data.joke }}</p>
+    <p class="card__id">#ID: {{ data.id }}</p>
     <button class="card__btn card__btn_add">Add to favourites</button>
+    </div>
   </div>
 </template>
 
@@ -45,6 +47,10 @@ export default {
     addToFavourites(){
       this.$store.commit('addToFavourites', this.data);
     },
+    test(){
+      console.log('test');
+      this.dataLoaded = true;
+    }
   },
 }
 </script>

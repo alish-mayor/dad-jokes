@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card__header">
         <h2 class="card__title">One day dad said:</h2>
-        <button class="card__btn card__btn_load">Load</button>
+        <button class="card__btn card__btn_load" @click="loadData">Load</button>
       </div>
       <joke-card/>
     </div>
@@ -18,6 +18,11 @@ export default {
   name: 'Home',
   components: {
     JokeCard,
+  },
+  methods:{
+    loadData(){
+      this.$children[0].loadJoke();
+    }
   }
 }
 </script>
@@ -26,7 +31,7 @@ export default {
 .card{
   background: #ffffff;
   min-width: 30rem;
-  max-width: 66.5rem;
+  width: 66.5rem;
   padding: 3rem;
   border-radius: 15px;
   box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.25);
