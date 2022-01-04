@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <!-- <p v-if="loading">Loading...</p> -->
-    <p class="card__text">What do you call cheese by itself? Provolone. asdjkndjandkjas asdjsandasj njkd asdnas jkdansd asdj njkn</p>
+    <p class="card__text">What do you call cheese by itself? Provolone.</p>
     <p class="card__id">#ID: hNu4oORnOmb</p>
     <button class="card__btn card__btn_add">Add to favourites</button>
   </div>
