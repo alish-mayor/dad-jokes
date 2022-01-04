@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <p v-if="loading" class="card__text">Loading...</p>
+    <div v-if="loading" class="loader"></div>
     <p v-if="checkEmpty(currentJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
     <div v-if="dataLoaded">
     <p class="card__text">{{ data.joke }}</p>
@@ -99,36 +99,55 @@ export default {
     background: #2c3e50;
   }
 
-
-.notif{
-  position: fixed;
-  top: calc(9rem + 20px);
-  right: 20px;
-  padding: 2rem 3rem;
-  background: #ffffff;
-  border-radius: 15px;
-  text-align: center;
-  color: #2c3e50;
-  animation: 2s ease-in-out 1s fadeAway;
-
-
-  &__title{
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
+  .loader {
+    border: 5px solid #eaf0f6;
+    border-radius: 50%;
+    border-top: 5px solid #e23c13;
+    width: 30px;
+    height: 30px;
+    animation: spinner 1s linear infinite;
   }
 
-  &__subtitle{
-    font-size: 1.4rem;
-    color: #ACACAC;
-  }
-}
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
 
-@keyframes fadeAway {
-  0%{
-    opacity: 1;
+    100% {
+      transform: rotate(360deg);
+    }
   }
-  100%{
-    opacity: 0;
+
+
+  .notif{
+    position: fixed;
+    top: calc(9rem + 20px);
+    right: 20px;
+    padding: 2rem 3rem;
+    background: #ffffff;
+    border-radius: 15px;
+    text-align: center;
+    color: #2c3e50;
+    animation: 2s ease-in-out 1s fadeAway;
+
+
+    &__title{
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__subtitle{
+      font-size: 1.4rem;
+      color: #ACACAC;
+    }
   }
-}
+
+  @keyframes fadeAway {
+    0%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
 </style>
