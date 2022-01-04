@@ -59,6 +59,10 @@ export default {
     &_load{
       background: #e23c13;
     }
+
+    &:hover{
+      filter: brightness(90%);
+    }
   }
   
 }

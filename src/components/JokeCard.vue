@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <p v-if="loading" class="card__text">Loading...</p>
+    <p v-if="checkEmpty(currentJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
     <div v-if="dataLoaded">
     <p class="card__text">{{ data.joke }}</p>
     <p class="card__id">#ID: {{ data.id }}</p>
@@ -14,7 +15,6 @@
 </template>
 
 <script>
-import helper from '../helper.js';
 
 export default {
   name: 'HelloWorld',
@@ -58,10 +58,12 @@ export default {
         this.featured = false;
       }, 3000)
     },  
-
+    checkEmpty(object) {
+      return Object.keys(object).length === 0 && object.constructor === Object;
+    },
   },
   created(){
-    if(helper.methods.checkEmpty(this.currentJoke)){
+    if(this.checkEmpty(this.currentJoke)){
       return;
     } else {
       this.dataLoaded = true;
