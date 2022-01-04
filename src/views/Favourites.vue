@@ -32,17 +32,19 @@ export default {
 
 <style scoped lang="scss">
 
+@import '../variables.scss';
+
 .favourites{
 
   &__title{
     text-align: center;
     font-size: 3rem;
-    color: #2c3e50;
+    color: $dark;
   }
 
   &__list{
     margin-top: 2rem;
-    background: #ffffff;
+    background: $white;
     width: 66.5rem;
     min-width: 30rem;
     list-style-type: none;
@@ -64,7 +66,7 @@ export default {
 
   &__text{
     font-size: 1.8rem;
-    color: #2c3e50;
+    color: $dark;
     margin-bottom: 0.5rem;
     width: 90%;
   }

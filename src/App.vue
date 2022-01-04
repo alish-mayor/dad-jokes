@@ -15,10 +15,8 @@
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'variables.scss';
 
-$primary: #e23c13;
-$dark: #2c3e50;
-$white: #ffffff;
 
 *,
 *::before,
@@ -79,7 +77,7 @@ $white: #ffffff;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #F4F3F3;
+  background: $light-grey;
   padding: 1rem;
 }
 

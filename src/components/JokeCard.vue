@@ -79,30 +79,33 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../variables.scss';
+
+
   .content{
     margin-top: 3rem;
   }
 
   .card__text{
     font-size: 1.8rem;
-    color: #2c3e50;
+    color: $dark;
     margin-bottom: 0.5rem;
   }
 
   .card__id{
     font-size: 1.6rem;
-    color: #A6A6A6;
+    color: $dark-grey;
     margin-bottom: 1.5rem;
   }
 
   .card__btn_add{
-    background: #2c3e50;
+    background: $dark;
   }
 
   .loader {
     border: 5px solid #eaf0f6;
     border-radius: 50%;
-    border-top: 5px solid #e23c13;
+    border-top: 5px solid $primary;
     width: 30px;
     height: 30px;
     animation: spinner 1s linear infinite;
@@ -124,10 +127,10 @@ export default {
     top: calc(9rem + 20px);
     right: 20px;
     padding: 2rem 3rem;
-    background: #ffffff;
+    background: $white;
     border-radius: 15px;
     text-align: center;
-    color: #2c3e50;
+    color: $primary;
     animation: 2s ease-in-out 1s fadeAway;
 
 

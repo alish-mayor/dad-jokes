@@ -28,8 +28,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../variables.scss';
+
 .card{
-  background: #ffffff;
+  background: $white;
   min-width: 30rem;
   width: 66.5rem;
   padding: 3rem;
@@ -45,11 +47,11 @@ export default {
   &__title{
     font-size: 2.4rem;
     font-weight: 500;
-    color: #2c3e50;
+    color: $dark;
   }
 
   &__btn{
-    color: #ffffff;
+    color: $white;
     border-radius: 5px;
     border: none;
     padding: 1rem 1.5rem;
@@ -57,7 +59,7 @@ export default {
     cursor: pointer;
 
     &_load{
-      background: #e23c13;
+      background: $primary;
     }
 
     &:hover{
