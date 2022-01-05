@@ -33,7 +33,7 @@ export default {
 .card{
   background: $white;
   min-width: 30rem;
-  width: 66.5rem;
+  max-width: 66.5rem;
   padding: 3rem;
   border-radius: 15px;
   box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.25);
@@ -60,6 +60,7 @@ export default {
 
     &_load{
       background: $primary;
+      margin-left: 1rem;
     }
 
     &:hover{

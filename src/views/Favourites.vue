@@ -45,7 +45,7 @@ export default {
   &__list{
     margin-top: 2rem;
     background: $white;
-    width: 66.5rem;
+    max-width: 66.5rem;
     min-width: 30rem;
     list-style-type: none;
     border-radius: 15px;

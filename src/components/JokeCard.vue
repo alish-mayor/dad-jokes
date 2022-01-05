@@ -137,6 +137,7 @@ export default {
     &__title{
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
+      color: $dark;
     }
 
     &__subtitle{
