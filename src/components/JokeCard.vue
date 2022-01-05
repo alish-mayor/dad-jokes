@@ -88,7 +88,7 @@ export default {
 
   .card__text{
     font-size: 1.8rem;
-    color: $dark;
+    // color: $dark;
     margin-bottom: 0.5rem;
   }
 
@@ -110,18 +110,6 @@ export default {
     height: 30px;
     animation: spinner 1s linear infinite;
   }
-
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-
   .notif{
     position: fixed;
     top: calc(9rem + 20px);
@@ -137,12 +125,22 @@ export default {
     &__title{
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
-      color: $dark;
+      // color: $dark;
     }
 
     &__subtitle{
       font-size: 1.4rem;
       color: #ACACAC;
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
     }
   }
 

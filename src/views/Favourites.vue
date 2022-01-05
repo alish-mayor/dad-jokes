@@ -39,7 +39,7 @@ export default {
   &__title{
     text-align: center;
     font-size: 3rem;
-    color: $dark;
+    // color: $dark;
   }
 
   &__list{
@@ -66,7 +66,7 @@ export default {
 
   &__text{
     font-size: 1.8rem;
-    color: $dark;
+    // color: $dark;
     margin-bottom: 0.5rem;
     width: 90%;
   }
@@ -90,8 +90,16 @@ export default {
     align-items: flex-start;
   }
 
+  .favourites__text{
+    width: 100%;
+  }
+
   .favourites__id{
     margin-bottom: 0.8rem;
+  }
+
+  .card__btn_load{
+    margin-left: 0;
   }
 }
 

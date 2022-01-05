@@ -47,7 +47,7 @@ export default {
   &__title{
     font-size: 2.4rem;
     font-weight: 500;
-    color: $dark;
+    // color: $dark;
   }
 
   &__btn{
