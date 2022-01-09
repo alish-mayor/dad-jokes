@@ -8,8 +8,8 @@
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
     </div>
     <div class="notif" v-if="featured">
-      <h3 class="notif__title">Success!</h3>
-      <p class="notif__subtitle">Your joke added to favourites list.</p>
+      <h3 class="notif__title">{{ notifTitle }}</h3>
+      <p class="notif__subtitle">{{ notifText }}</p>
     </div>
   </div>
 </template>
@@ -26,41 +26,69 @@ export default {
       dataLoaded: false,
       loading: false,
       featured: false,
+      notifTitle: '',
+      notifText: '',
     }
   },
   methods: {
     loadJoke(){
-      const joke = this;
-      this.dataLoaded = false;
-      this.loading = true;
-      const url = "https://icanhazdadjoke.com/";
+      // const joke = this;
+      // this.dataLoaded = false;
+      // this.loading = true;
+      // const url = "https://icanhazdadjoke.com/";
 
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", url);
+      // const xhr = new XMLHttpRequest();
+      // xhr.open("GET", url);
         
 
-      xhr.setRequestHeader("Accept", "application/json");
+      // xhr.setRequestHeader("Accept", "application/json");
 
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            joke.data = JSON.parse(xhr.responseText);
-            joke.loading = false;
-            joke.dataLoaded = true;
-            joke.$store.commit('changeCurrentJoke', joke.data);
-      }};
+      // xhr.onreadystatechange = function () {
+      //     if (xhr.readyState === 4) {
+      //       joke.data = JSON.parse(xhr.responseText);
+      //       joke.loading = false;
+      //       joke.dataLoaded = true;
+      //       joke.$store.commit('changeCurrentJoke', joke.data);
+      // }};
 
-      xhr.send();
+      // xhr.send();
+      this.dataLoaded = false;
+      this.loading = true;
+      this.data = {
+        joke: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, error?',
+        id: 'jjknaibioord',
+      },
+      this.$store.commit('changeCurrentJoke', this.data);
+      this.loading = false;
+      this.dataLoaded = true;
     },
     addToFavourites(){
-      this.$store.commit('addToFavourites', this.data);
-      this.featured = true;
-      setTimeout(() => {
-        this.featured = false;
-      }, 3000)
+      if(this.favourites.includes(this.currentJoke)){
+      this.notifTitle = 'Error';
+      this.notifText = 'This joke added already!';
+      this.showNotif();
+      console.log(this.favourites);
+      console.log(this.currentJoke);
+      return;
+      } else{
+      this.notifTitle = 'Success!';
+      this.notifText = 'Your joke added to favourites list.'
+      this.$store.commit('addToFavourites', this.currentJoke);
+      this.showNotif();
+      console.log(this.favourites);
+      console.log(this.currentJoke);
+      }
+      
     },  
     checkEmpty(object) {
       return Object.keys(object).length === 0 && object.constructor === Object;
     },
+    showNotif(){
+      this.featured = true;
+      setTimeout(() => {
+        this.featured = false;
+      }, 3000);
+    }
   },
   created(){
     if(this.checkEmpty(this.currentJoke)){
@@ -73,6 +101,9 @@ export default {
   computed: {
     currentJoke(){
       return this.$store.state.currentJoke;
+    },
+    favourites(){
+      return this.$store.state.favourites;
     }
   }
 }
@@ -125,7 +156,7 @@ export default {
     &__title{
       font-size: 1.6rem;
       margin-bottom: 0.5rem;
-      // color: $dark;
+      color: $dark;
     }
 
     &__subtitle{
