@@ -55,14 +55,12 @@ export default {
     },
     addToFavourites(){
       if(this.favourites.includes(this.currentJoke)){
-      this.notifTitle = 'Error';
-      this.notifText = 'This joke added already!';
+      this.setNotifText('Error', 'This joke added already!');
       this.showNotif();
       return;
       } else{
-      this.notifTitle = 'Success!';
-      this.notifText = 'Your joke added to favourites list.'
       this.$store.commit('addToFavourites', this.currentJoke);
+      this.setNotifText('Success!', 'Your joke added to favourites list.');
       this.showNotif();
       }
       
@@ -78,6 +76,10 @@ export default {
         this.favourited = false;
         btn.disabled = false;
       }, 3000);
+    },
+    setNotifText(title,subtitle){
+      this.notifTitle = title;
+      this.notifText = subtitle;
     }
   },
   created(){
@@ -109,7 +111,6 @@ export default {
 
   .card__text{
     font-size: 1.8rem;
-    // color: $dark;
     margin-bottom: 0.5rem;
   }
 

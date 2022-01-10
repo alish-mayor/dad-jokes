@@ -39,7 +39,6 @@ export default {
   &__title{
     text-align: center;
     font-size: 3rem;
-    // color: $dark;
   }
 
   &__list{
@@ -66,7 +65,6 @@ export default {
 
   &__text{
     font-size: 1.8rem;
-    // color: $dark;
     margin-bottom: 0.5rem;
     width: 90%;
   }
