@@ -11,8 +11,6 @@ export default new Vuex.Store({
   },
   mutations: {
     addToFavourites(state, joke) {
-      // if (state.favourites.includes(joke) || helper.methods.checkEmpty(joke))
-      //   return;
       state.favourites.push(joke);
     },
     deleteJoke(state, index) {
@@ -23,5 +21,13 @@ export default new Vuex.Store({
     },
   },
   actions: {},
+  getters: {
+    getCurJoke(state) {
+      return state.currentJoke;
+    },
+    getFavourites(state) {
+      return state.favourites;
+    },
+  },
   modules: {},
 });

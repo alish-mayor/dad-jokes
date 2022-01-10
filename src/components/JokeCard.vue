@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div v-if="loading" class="loader"></div>
-    <p v-if="checkEmpty(currentJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
+    <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
     <div v-if="dataLoaded">
     <p class="card__text">{{ data.joke }}</p>
     <p class="card__id">#ID: {{ data.id }}</p>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'HelloWorld',
@@ -54,12 +55,12 @@ export default {
       xhr.send();
     },
     addToFavourites(){
-      if(this.favourites.includes(this.currentJoke)){
+      if(this.getFavourites.includes(this.getCurJoke)){
       this.setNotifText('Error', 'This joke added already!');
       this.showNotif();
       return;
       } else{
-      this.$store.commit('addToFavourites', this.currentJoke);
+      this.$store.commit('addToFavourites', this.getCurJoke);
       this.setNotifText('Success!', 'Your joke added to favourites list.');
       this.showNotif();
       }
@@ -83,21 +84,14 @@ export default {
     }
   },
   created(){
-    if(this.checkEmpty(this.currentJoke)){
+    if(this.checkEmpty(this.getCurJoke)){
       return;
     } else {
       this.dataLoaded = true;
-      this.data = this.currentJoke;
+      this.data = this.getCurJoke;
     }
   },
-  computed: {
-    currentJoke(){
-      return this.$store.state.currentJoke;
-    },
-    favourites(){
-      return this.$store.state.favourites;
-    }
-  }
+  computed: mapGetters(['getCurJoke', 'getFavourites']),
 }
 </script>
 

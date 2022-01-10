@@ -1,9 +1,9 @@
 <template>
   <div class="favourites">
     <h1 class="favourites__title">Favourites</h1>
-    <p class="favourites__caption" v-if="favourites.length < 1">You don't have any favourited joke yet. <br> Please add one at least!</p>
+    <p class="favourites__caption" v-if="getFavourites.length < 1">You don't have any favourited joke yet. <br> Please add one at least!</p>
     <ol class="favourites__list">
-      <li v-for="(item, index) in favourites" :key="item.id" class="favourites__item">
+      <li v-for="(item, index) in getFavourites" :key="item.id" class="favourites__item">
         <div>
           <p class="favourites__text">{{ item.joke }}</p>
           <p class="favourites__id">#ID: {{ item.id }}</p>
@@ -15,13 +15,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex' 
+
 export default {
+  
    name: 'Favourites',
-   computed:{
-     favourites(){
-       return this.$store.state.favourites;
-     }
-   },
+   computed: mapGetters(['getFavourites']),
    methods: {
      deleteJoke(index){
        this.$store.commit('deleteJoke', index);
