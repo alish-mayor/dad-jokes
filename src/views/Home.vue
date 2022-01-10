@@ -57,6 +57,7 @@ export default {
     padding: 1rem 1.5rem;
     font-size: 1.6rem;
     cursor: pointer;
+    font-family: inherit;
 
     &_load{
       background: $primary;

@@ -7,7 +7,7 @@
     <p class="card__id">#ID: {{ data.id }}</p>
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
     </div>
-    <div class="notif" v-if="featured">
+    <div class="notif" v-if="favourited">
       <h3 class="notif__title">{{ notifTitle }}</h3>
       <p class="notif__subtitle">{{ notifText }}</p>
     </div>
@@ -25,58 +25,45 @@ export default {
       id: '',
       dataLoaded: false,
       loading: false,
-      featured: false,
+      favourited: false,
       notifTitle: '',
       notifText: '',
     }
   },
   methods: {
     loadJoke(){
-      // const joke = this;
-      // this.dataLoaded = false;
-      // this.loading = true;
-      // const url = "https://icanhazdadjoke.com/";
-
-      // const xhr = new XMLHttpRequest();
-      // xhr.open("GET", url);
-        
-
-      // xhr.setRequestHeader("Accept", "application/json");
-
-      // xhr.onreadystatechange = function () {
-      //     if (xhr.readyState === 4) {
-      //       joke.data = JSON.parse(xhr.responseText);
-      //       joke.loading = false;
-      //       joke.dataLoaded = true;
-      //       joke.$store.commit('changeCurrentJoke', joke.data);
-      // }};
-
-      // xhr.send();
+      const joke = this;
       this.dataLoaded = false;
       this.loading = true;
-      this.data = {
-        joke: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, error?',
-        id: 'jjknaibioord',
-      },
-      this.$store.commit('changeCurrentJoke', this.data);
-      this.loading = false;
-      this.dataLoaded = true;
+      const url = "https://icanhazdadjoke.com/";
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+        
+
+      xhr.setRequestHeader("Accept", "application/json");
+
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            joke.data = JSON.parse(xhr.responseText);
+            joke.loading = false;
+            joke.dataLoaded = true;
+            joke.$store.commit('changeCurrentJoke', joke.data);
+      }};
+
+      xhr.send();
     },
     addToFavourites(){
       if(this.favourites.includes(this.currentJoke)){
       this.notifTitle = 'Error';
       this.notifText = 'This joke added already!';
       this.showNotif();
-      console.log(this.favourites);
-      console.log(this.currentJoke);
       return;
       } else{
       this.notifTitle = 'Success!';
       this.notifText = 'Your joke added to favourites list.'
       this.$store.commit('addToFavourites', this.currentJoke);
       this.showNotif();
-      console.log(this.favourites);
-      console.log(this.currentJoke);
       }
       
     },  
@@ -84,9 +71,12 @@ export default {
       return Object.keys(object).length === 0 && object.constructor === Object;
     },
     showNotif(){
-      this.featured = true;
+      const btn = document.querySelector('.card__btn_add');
+      this.favourited = true;
+      btn.disabled = true;
       setTimeout(() => {
-        this.featured = false;
+        this.favourited = false;
+        btn.disabled = false;
       }, 3000);
     }
   },
@@ -143,8 +133,8 @@ export default {
   }
   .notif{
     position: fixed;
-    top: calc(9rem + 20px);
-    right: 20px;
+    top: 11rem;
+    right: 2rem;
     padding: 2rem 3rem;
     background: $white;
     border-radius: 15px;
@@ -183,4 +173,12 @@ export default {
       opacity: 0;
     }
   }
+
+
+  @media (min-width: 320px) and (max-width: 600px) {
+  .notif{
+    top: 9rem;
+    right: 1rem;
+  }
+}
 </style>
