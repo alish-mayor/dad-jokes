@@ -20,7 +20,24 @@ export default new Vuex.Store({
       state.currentJoke = Object.assign({}, joke);
     },
   },
-  actions: {},
+  actions: {
+    loadJoke(context) {
+      const url = "https://icanhazdadjoke.com/";
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+
+      xhr.setRequestHeader("Accept", "application/json");
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          context.commit("changeCurrentJoke", JSON.parse(xhr.responseText));
+        }
+      };
+
+      xhr.send();
+    },
+  },
   getters: {
     getCurJoke(state) {
       return state.currentJoke;

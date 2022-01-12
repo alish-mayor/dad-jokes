@@ -1,10 +1,10 @@
 <template>
   <div class="content">
-    <div v-if="loading" class="loader"></div>
-    <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
-    <div v-if="dataLoaded">
-    <p class="card__text">{{ data.joke }}</p>
-    <p class="card__id">#ID: {{ data.id }}</p>
+    <!-- <div v-if="loading" class="loader"></div> -->
+    <!-- <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p> -->
+    <div>
+    <p class="card__text">{{ getCurJoke.joke }}</p>
+    <p class="card__id">#ID: {{ getCurJoke.id }}</p>
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
     </div>
     <div class="notif" v-if="favourited">
@@ -21,39 +21,12 @@ export default {
   name: 'HelloWorld',
   data(){
     return{
-      data: {},
-      joke: '',
-      id: '',
-      dataLoaded: false,
-      loading: false,
       favourited: false,
       notifTitle: '',
       notifText: '',
     }
   },
   methods: {
-    loadJoke(){
-      const joke = this;
-      this.dataLoaded = false;
-      this.loading = true;
-      const url = "https://icanhazdadjoke.com/";
-
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", url);
-        
-
-      xhr.setRequestHeader("Accept", "application/json");
-
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            joke.data = JSON.parse(xhr.responseText);
-            joke.loading = false;
-            joke.dataLoaded = true;
-            joke.$store.commit('changeCurrentJoke', joke.data);
-      }};
-
-      xhr.send();
-    },
     addToFavourites(){
       if(this.getFavourites.includes(this.getCurJoke)){
       this.setNotifText('Error', 'This joke added already!');
@@ -64,11 +37,7 @@ export default {
       this.setNotifText('Success!', 'Your joke added to favourites list.');
       this.showNotif();
       }
-      
     },  
-    checkEmpty(object) {
-      return Object.keys(object).length === 0 && object.constructor === Object;
-    },
     showNotif(){
       const btn = document.querySelector('.card__btn_add');
       this.favourited = true;
@@ -81,13 +50,16 @@ export default {
     setNotifText(title,subtitle){
       this.notifTitle = title;
       this.notifText = subtitle;
-    }
+    },
+    checkEmpty(object) {
+      return Object.keys(object).length === 0 && object.constructor === Object;
+    },
   },
   created(){
     if(this.checkEmpty(this.getCurJoke)){
       return;
     } else {
-      this.dataLoaded = true;
+
       this.data = this.getCurJoke;
     }
   },

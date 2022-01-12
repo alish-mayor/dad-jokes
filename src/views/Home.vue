@@ -21,7 +21,7 @@ export default {
   },
   methods:{
     loadData(){
-      this.$children[0].loadJoke();
+      this.$store.dispatch('loadJoke')
     }
   }
 }
