@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import helper from "../helper.js";
 
 Vue.use(Vuex);
 
@@ -32,9 +31,9 @@ export default new Vuex.Store({
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           context.commit("changeCurrentJoke", JSON.parse(xhr.responseText));
+          console.log("dataloaded");
         }
       };
-
       xhr.send();
     },
   },

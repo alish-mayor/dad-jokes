@@ -1,8 +1,12 @@
 <template>
-  <div class="content">
-    <!-- <div v-if="loading" class="loader"></div> -->
-    <!-- <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p> -->
-    <div>
+  <div class="card">
+     <div class="card__header">
+        <h2 class="card__title">One day dad said:</h2>
+        <button class="card__btn card__btn_load" @click="loadData">Load</button>
+      </div>
+    <div v-if="loading" class="loader"></div>
+    <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
+    <div class="content">
     <p class="card__text">{{ getCurJoke.joke }}</p>
     <p class="card__id">#ID: {{ getCurJoke.id }}</p>
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
@@ -15,6 +19,7 @@
 </template>
 
 <script>
+
 import {mapGetters} from 'vuex'
 
 export default {
@@ -24,6 +29,7 @@ export default {
       favourited: false,
       notifTitle: '',
       notifText: '',
+      loading: false,
     }
   },
   methods: {
@@ -54,12 +60,16 @@ export default {
     checkEmpty(object) {
       return Object.keys(object).length === 0 && object.constructor === Object;
     },
+    loadData(){
+      this.loading = true;
+      this.$store.dispatch('loadJoke');
+      this.loading = false;
+    }
   },
   created(){
     if(this.checkEmpty(this.getCurJoke)){
       return;
     } else {
-
       this.data = this.getCurJoke;
     }
   },
@@ -74,6 +84,46 @@ export default {
   .content{
     margin-top: 3rem;
   }
+
+  .card{
+  background: $white;
+  min-width: 30rem;
+  max-width: 66.5rem;
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.25);
+  
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title{
+    font-size: 2.4rem;
+    font-weight: 500;
+  }
+
+  &__btn{
+    color: $white;
+    border-radius: 5px;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    font-family: inherit;
+
+    &_load{
+      background: $primary;
+      margin-left: 1rem;
+    }
+
+    &:hover{
+      filter: brightness(90%);
+    }
+  }
+  
+}
 
   .card__text{
     font-size: 1.8rem;
