@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     currentJoke: {},
     favourites: [],
+    isLoading: false,
   },
   mutations: {
     addToFavourites(state, joke) {
@@ -18,10 +19,15 @@ export default new Vuex.Store({
     changeCurrentJoke(state, joke) {
       state.currentJoke = Object.assign({}, joke);
     },
+    changeLoading(state, param) {
+      state.isLoading = param;
+    },
   },
   actions: {
     loadJoke(context) {
       const url = "https://icanhazdadjoke.com/";
+
+      context.commit("changeLoading", true);
 
       const xhr = new XMLHttpRequest();
       xhr.open("GET", url);
@@ -31,7 +37,7 @@ export default new Vuex.Store({
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           context.commit("changeCurrentJoke", JSON.parse(xhr.responseText));
-          console.log("dataloaded");
+          context.commit("changeLoading", false);
         }
       };
       xhr.send();
@@ -43,6 +49,9 @@ export default new Vuex.Store({
     },
     getFavourites(state) {
       return state.favourites;
+    },
+    isLoading(state) {
+      return state.isLoading;
     },
   },
   modules: {},

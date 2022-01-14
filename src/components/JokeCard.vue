@@ -4,9 +4,11 @@
         <h2 class="card__title">One day dad said:</h2>
         <button class="card__btn card__btn_load" @click="loadData">Load</button>
       </div>
-    <div v-if="loading" class="loader"></div>
-    <p v-if="checkEmpty(getCurJoke) && (!loading)" class="card__text">Nothing here... Please load your first joke.</p>
-    <div class="content">
+    <div class="loading-container">
+      <div v-if="isLoading" class="loader"></div>
+      <p v-if="checkEmpty(getCurJoke) && (!isLoading)" class="card__text">Nothing here... Please load your first joke.</p>
+    </div>
+    <div class="content" v-if="!isLoading">
     <p class="card__text">{{ getCurJoke.joke }}</p>
     <p class="card__id">#ID: {{ getCurJoke.id }}</p>
     <button class="card__btn card__btn_add" @click="addToFavourites">Add to favourites</button>
@@ -29,12 +31,11 @@ export default {
       favourited: false,
       notifTitle: '',
       notifText: '',
-      loading: false,
     }
   },
   methods: {
     addToFavourites(){
-      if(this.getFavourites.includes(this.getCurJoke)){
+      if(this.getFavourites.includes(this.getCurJoke) || this.checkEmpty(this.getCurJoke)){
       this.setNotifText('Error', 'This joke added already!');
       this.showNotif();
       return;
@@ -61,9 +62,7 @@ export default {
       return Object.keys(object).length === 0 && object.constructor === Object;
     },
     loadData(){
-      this.loading = true;
       this.$store.dispatch('loadJoke');
-      this.loading = false;
     }
   },
   created(){
@@ -73,7 +72,7 @@ export default {
       this.data = this.getCurJoke;
     }
   },
-  computed: mapGetters(['getCurJoke', 'getFavourites']),
+  computed: mapGetters(['getCurJoke', 'getFavourites', 'isLoading']),
 }
 </script>
 
@@ -122,22 +121,25 @@ export default {
       filter: brightness(90%);
     }
   }
-  
-}
 
-  .card__text{
+  &__text{
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
   }
-
-  .card__id{
+  
+  &__id{
     font-size: 1.6rem;
     color: $dark-grey;
     margin-bottom: 1.5rem;
   }
-
-  .card__btn_add{
+  
+  &__btn_add{
     background: $dark;
+  }
+}
+
+  .loading-container{
+    margin-top: 3rem;
   }
 
   .loader {
@@ -148,6 +150,9 @@ export default {
     height: 30px;
     animation: spinner 1s linear infinite;
   }
+
+  
+
   .notif{
     position: fixed;
     top: 11rem;
