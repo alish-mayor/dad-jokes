@@ -35,15 +35,21 @@ export default {
   },
   methods: {
     addToFavourites(){
-      if(this.getFavourites.includes(this.getCurJoke) || this.checkEmpty(this.getCurJoke)){
+      if(this.getFavourites.includes(this.getCurJoke)){
       this.setNotifText('Error', 'This joke added already!');
       this.showNotif();
       return;
-      } else{
+      }
+      
+      if (this.checkEmpty(this.getCurJoke)){
+      this.setNotifText('Error', 'Joke is not loaded yet!');
+      this.showNotif();
+      return;
+      }
+
       this.$store.commit('addToFavourites', this.getCurJoke);
       this.setNotifText('Success!', 'Your joke added to favourites list.');
       this.showNotif();
-      }
     },  
     showNotif(){
       const btn = document.querySelector('.card__btn_add');
