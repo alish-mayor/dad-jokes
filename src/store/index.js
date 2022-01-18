@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
     addToFavourites(state, joke) {
-      state.favourites.push(joke);
+      state.favourites.unshift(joke);
     },
     deleteJoke(state, index) {
       state.favourites.splice(index, 1);
