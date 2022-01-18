@@ -36,33 +36,28 @@ export default {
   methods: {
     addToFavourites(){
       if(this.getFavourites.includes(this.getCurJoke)){
-      this.setNotifText('Error', 'This joke added already!');
-      this.showNotif();
+      this.showNotif('Error!', 'This joke added already!');
       return;
       }
       
       if (this.checkEmpty(this.getCurJoke)){
-      this.setNotifText('Error', 'Joke is not loaded yet!');
-      this.showNotif();
+      this.showNotif('Error!', 'Joke is not loaded yet!');
       return;
       }
 
       this.$store.commit('addToFavourites', this.getCurJoke);
-      this.setNotifText('Success!', 'Your joke added to favourites list.');
-      this.showNotif();
+      this.showNotif('Success!', 'Your joke added to favourites list.');
     },  
-    showNotif(){
+    showNotif(title, subtitle){
       const btn = document.querySelector('.card__btn_add');
-      this.favourited = true;
       btn.disabled = true;
+      this.favourited = true;
+      this.notifTitle = title;
+      this.notifText = subtitle;
       setTimeout(() => {
         this.favourited = false;
         btn.disabled = false;
       }, 3000);
-    },
-    setNotifText(title,subtitle){
-      this.notifTitle = title;
-      this.notifText = subtitle;
     },
     checkEmpty(object) {
       return Object.keys(object).length === 0 && object.constructor === Object;
